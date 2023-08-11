@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        section {
+            display: flex;
+            width: 600px;
+            height: 430px;
+        }
+        section img {
+            width: 0px;
+            flex-grow: 1;
+            object-fit: cover;
+            opacity: .8;
+            transition: 0.5s ease;
+
+        }
+        section img:hover{
+            cursor: crosshair;
+            width: 300px;
+            opacity: 1;
+            filter:contrast(120%)
+        }
+    </style>
+</head>
+<body>
+    <p>Mi galería</p>
+    <section>
+        <img src="https://i.pinimg.com/236x/9a/d6/ce/9ad6ce83ba565772785cd32a8e792892.jpg" alt="imagen no disponible">
+        <img src="https://i.pinimg.com/236x/68/aa/ee/68aaee43f6a72b1395be66f87c9f4345.jpg" alt="imagen no disponible">
+        <img src="https://i.pinimg.com/236x/5a/3e/4f/5a3e4f15d482e3f9c1d7a558c0f23a37.jpg" alt="imagen no disponible">
+        <img src="https://i.pinimg.com/236x/b9/89/a3/b989a31a60263eec9aa60afe02cc3df1.jpg" alt="imagen no disponible">
+    </section>
+    <button onClick="llamada()" >hola</button>
+</body>
+</html>
+<script>
+    console.log("Hola, mundo!")
+    //filter para obtener los elemnentos del array que tienen una propiedad en específico
+    //en este caso para obtener los que tienen la propiedad key_3
+    const list = [{'key_1':'value_1', 'key_2':'value_2'},
+               {'key_3':'value_1', 'key_2':'value_2'}]
+    console.log(list.filter( property => {return property.key_3}))
+    
+    //Obtener un booleano para saber si un elemnto de una lista cumple una condición
+    console.log(list.some( property =>  property.key_1))
+    
+    //Uso del reduce para obtener un valor que es obtenido por "acumulación"
+    //In this case, I can obtain the max value of list list.
+    const numbers = [10, 0, 50, 125, 75, 6, 3];
+    const res = numbers.reduce((acc, item)=>{
+        console.log("si")
+        return acc = acc>=item ? acc:item // return Math.max(acc, item) la función mathmax me permite obtener el valor más grande entre 2 números
+    });
+    console.log(res)
+
+
+    //TESTING THE DESESTRUCTUTRING OPERATOR
+    const b = [...list]
+    console.log(b)
+    const object = {
+                    'property1':'nombre',
+                    'list1':[{'key_4':'value_4', 'key_6':'value_6'},
+                             {'key_5':'value_5', 'key_7':'value_7'}]}
+    
+    console.log({...object});
+    //replacing the property name to a new name and replacing the property list to a clean list
+    console.log({...object, 'property1':'nuevo nombre haha'})
+    console.log(`soy el contexto original`,object);
+
+    console.log({...object, 'list1':[]})
+    console.log(`soy el contexto original`,object);
+    
+    //replacing the value of a property of an element of a property (that is a array)
+    //keeping the original without changes
+    console.log({...object, 'list1': [...object.list1].map((x,i)=>{
+        return i===0?{...x,'key_4': 'soy el nuevo valor de la llave 4'}:{...x}
+    })});
+    console.log(`soy el contexto original`,object);
+
+    console.log("####################################")
+
+    const test = ['a','b','c','d']
+    test.forEach((i,index)=>{
+        switch (index){
+            case 0:
+                console.log("bruh0");
+                break;
+            case 1:
+                console.log("bruh1");
+                break;
+        }
+        console.log(i)
+    })
+    console.log("####################################")
+
+    test_1 = "soy un test"
+    object_test = {[test_1]:test_1}
+    console.log(object_test)
+    console.log("####################################")
+    
+    const llamada = () =>{
+        fetch('https://pokeapi.co/api/v2/pokemon/ditto')
+        .then(response => response.json())
+        .then(response => console.log(response))
+        .catch(err => console.error(err));
+    };
+
+
+
+
+
+
+</script>
